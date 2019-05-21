@@ -1,0 +1,68 @@
+---
+title: "Markdown Scraper"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("rvest")
+install.packages("stringr")
+```
+
+```{r}
+library("rvest")
+library("stringr")
+```
+```{r}
+galaxielink = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_trksid=p2380057.m570.l2632.R2.TR12.TRC2.A0.H0.Xedsel+.TRS0&_nkw=edsel&UF_single_selection=Make%3AFord%2CModel%3AGalaxie&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1"
+galaxiedata = read_html(galaxielink)
+galaxiedata
+```
+
+```{r}
+galaxieprice = galaxiedata %>%
+  html_nodes(".s-item__price")%>%
+  html_text()
+galaxieprice
+adjgalaxieprice = str_extract(galaxieprice, pattern = "[[:digit:]]{1,3}[,][[:digit:]]{1,3}")
+adjgalaxieprice
+adjgalaxiepricenocomma = str_replace(adjgalaxieprice, pattern = "[,]", replacement = "")
+adjustedprice = as.numeric(adjgalaxiepricenocomma)
+adjustedprice
+length(adjustedprice)
+adjgalaxiepricenocomma
+galaxielisting = galaxiedata%>%
+  html_nodes(".s-item__title")%>%
+  html_text()
+
+```
+
+```{r}
+firebirdlink = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&UF_single_selection=Make%3APontiac%2CModel%3AFirebird&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1&Model%2520Year=1993%7C1994%7C1995%7C1996%7C1997%7C1998%7C1999%7C2000%7C2001%7C2002&_nkw=Pontiac+Firebird&rt=nc&LH_BIN=1"
+firebirddata = read_html(firebirdlink)
+```
+```{r}
+library("stringr")
+firebirdprice = firebirddata %>%
+  html_nodes(".s-item__price")%>%
+  html_text()
+firebirdprice
+priceadjust = function(x) {
+  adjust1 = str_extract(x, pattern = "[[:digit:]]{1,3}[,][[:digit:]]{1,3}")
+  adjust2 = str_replace(adjust1,pattern = "[,]", replacement = "")
+  adjust3 = as.numeric(adjust2)
+  adjust3
+}
+priceadjust(firebirdprice)
+fbpriceadj = priceadjust(firebirdprice)
+firebirdtitle = firebirddata %>%
+  html_nodes(".s-item__title")%>%
+  html_text()
+firebirdtitle
+firebirddf = data.frame(firebirdtitle,fbpriceadj)
+firebirddf
+```
+
