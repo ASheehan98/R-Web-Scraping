@@ -43,6 +43,12 @@ galaxielisting = galaxiedata%>%
 ```{r}
 firebirdlink = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&UF_single_selection=Make%3APontiac%2CModel%3AFirebird&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1&Model%2520Year=1993%7C1994%7C1995%7C1996%7C1997%7C1998%7C1999%7C2000%7C2001%7C2002&_nkw=Pontiac+Firebird&rt=nc&LH_BIN=1"
 firebirddata = read_html(firebirdlink)
+
+#https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&UF_single_selection=Make%3AChevrolet%2CModel%3ACorvette&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1&Model%2520Year=1993%7C1994%7C1995%7C1996%7C1997%7C1998%7C1999%7C2000%7C2001%7C2002&_nkw=Chevrolet+Corvette&rt=nc&LH_BIN=1
+
+#https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&UF_single_selection=Make%3Aporsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1&Model%2520Year=1993%7C1994%7C1995%7C1996%7C1997%7C1998%7C1999%7C2000%7C2001%7C2002&_nkw=porsche+911&rt=nc&LH_BIN=1
+
+
 ```
 ```{r}
 library("stringr")
@@ -62,7 +68,31 @@ firebirdtitle = firebirddata %>%
   html_nodes(".s-item__title")%>%
   html_text()
 firebirdtitle
-firebirddf = data.frame(firebirdtitle,fbpriceadj)
+firebirddf = data.frame("Listing" = firebirdtitle,"Price" = fbpriceadj)
 firebirddf
+summary(fbpriceadj)
+
+
+
+
+#"https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Chevrolet+Corvette&rt=nc&LH_BIN=1&UF_single_selection=Make%3AChevrolet%2CModel%3ACorvette&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1"
+```
+```{r}
+baseurl = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Chevrolet+Corvette&rt=nc&LH_BIN=1&UF_single_selection=Make%3AChevrolet%2CModel%3ACorvette&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1"
+
+firsturl = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw="
+secondurl = "&rt=nc&LH_BIN=1&UF_single_selection=Make%3A"
+thirdurl = "%2CModel%3A"
+fourthurl = "&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1"
+
+plus = "+"
+finalurl = paste0(firsturl,make,plus,model,secondurl,make,thirdurl,model,fourthurl)
+finalurl
+
+
+
+
+
+
 ```
 
