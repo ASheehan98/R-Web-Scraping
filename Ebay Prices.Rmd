@@ -72,6 +72,14 @@ firebirddf = data.frame("Listing" = firebirdtitle,"Price" = fbpriceadj)
 firebirddf
 summary(fbpriceadj)
 
+gettitle = function(x) {
+  x %>%
+  html_nodes(".s-item__title")%>%
+  html_text()
+  
+}
+
+
 
 
 
@@ -94,5 +102,8 @@ finalurl
 
 
 
+```
+```{r}
+pricegetter = 
 ```
 
