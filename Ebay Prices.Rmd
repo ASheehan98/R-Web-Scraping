@@ -79,10 +79,6 @@ gettitle = function(x) {
   
 }
 
-
-
-
-
 #"https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Chevrolet+Corvette&rt=nc&LH_BIN=1&UF_single_selection=Make%3AChevrolet%2CModel%3ACorvette&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1"
 ```
 ```{r}
