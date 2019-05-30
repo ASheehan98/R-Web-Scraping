@@ -104,8 +104,28 @@ page1df = data.frame("Listing" = page1listing,   "Price" = page1price)
 page2df = data.frame("Listing" = page2listing,    "Price" = page2price)
 page3df = data.frame("Listing" = page3listing,     "Price" = page3price)
 page4df = data.frame("Listing" = page4listing,       "Price" = page4price)
-x = rbind(page1df, page2df, page3df, page4df)
-x
+fulldataframe = rbind(page1df, page2df, page3df, page4df)
+
+page1year = yearget(page1listing)
+page2year = yearget(page2listing)
+page3year = yearget(page3listing)
+page4year = yearget(page4listing)
+
+
+yppage1 = data.frame("Year" = page1year, "Price" = page1price)
+yppage2 = data.frame("Year" = page2year, "Price" = page2price)
+yppage3 = data.frame("Year" = page3year, "Price" = page3price)
+yppage4 = data.frame("Year" = page4year, "Price" = page4price)
+
+graphdf = rbind(yppage1, yppage2, yppage3, yppage4)
+graphdf
+
+
+
+ggplot(graphdf, aes(x = Year, y = Price)) + geom_point() + labs(title = "Vehicle Price Vs. Vehicle Year") + scale_y_continuous("Price", limits = c(0,500000)) + scale_x_continuous("Model Year")
+
+
+
 ```
 
 
