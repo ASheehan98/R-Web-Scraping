@@ -30,8 +30,26 @@ porschelisting
 yearget = function(x) {
   year1 = str_extract(x, pattern = "[[:digit:]]{4}")
   year2 = as.numeric(year1)
+  year2
 }
-y = yearget(porschelisting)
-y
+yearget(porschelisting)
+
+```
+```{r}
+porscheyear = yearget(porschelisting)
+porscheprice = priceadjust(getprice(porschedata))
+porscheyear
+porscheprice
+porschedataframe = data.frame("Price" = porscheprice, "Year" = porscheyear)
+porschedataframe
+```
+```{r}
+install.packages("ggplot2")
+```
+```{r}
+library(ggplot2)
+```
+```{r}
+ggplot(porschedataframe, aes(x = porscheyear, y = porscheprice)) + geom_point()
 ```
 
