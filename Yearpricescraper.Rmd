@@ -45,11 +45,73 @@ porschedataframe
 ```
 ```{r}
 install.packages("ggplot2")
+install.packages("plotly")
+```
+
+```{r}
+ggplot(porschedataframe, aes(x = porscheyear, y = porscheprice)) + geom_point() + labs(title = "Vehicle Price Vs. Vehicle Year") + scale_y_continuous("Price", limits = c(10000,500000)) + scale_x_continuous("Model Year")
+
 ```
 ```{r}
-library(ggplot2)
+"https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1"
+
+"https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=2"
+
+"https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=1"
+
 ```
 ```{r}
-ggplot(porschedataframe, aes(x = porscheyear, y = porscheprice)) + geom_point()
+install.packages("Stack")
 ```
+
+```{r}
+page1 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=1"
+
+page2 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=2"
+
+page3 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=3"
+
+page4 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=4"
+
+mpurl1 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw="
+make = "Porsche"
+plus = "+"
+model = "911"
+mpurl2 = "&rt=nc&LH_BIN=1&UF_single_selection=Make%3A"
+mpurl3 = "%2C"
+mpurl4 = "%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn="
+second = "2"
+mpurl = paste0(mpurl1,make,plus,model,mpurl2,make,mpurl3,model,mpurl4,second)
+mpurl
+
+
+
+
+page1html = read_html(page1)
+page2html = read_html(page2)
+page3html = read_html(page3)
+page4html = read_html(page4)
+page1price = priceadjust(getprice(page1html))
+page2price = priceadjust(getprice(page2html))
+page3price = priceadjust(getprice(page3html))
+page4price = priceadjust(getprice(page4html))
+page1listing = gettitle(page1html)
+page2listing = gettitle(page2html)
+page3listing = gettitle(page3html)
+page4listing = gettitle(page4html)
+
+page1df = data.frame("Listing" = page1listing,   "Price" = page1price)
+page2df = data.frame("Listing" = page2listing,    "Price" = page2price)
+page3df = data.frame("Listing" = page3listing,     "Price" = page3price)
+page4df = data.frame("Listing" = page4listing,       "Price" = page4price)
+x = rbind(page1df, page2df, page3df, page4df)
+x
+```
+
+
+
+
+
+
+
 
