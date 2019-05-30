@@ -11,6 +11,7 @@ ui <- fluidPage(
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
       sidebarPanel(
+        
          textInput("make","Vehicle Make","Enter Make"),
          textInput("model","Vehicle Model","Enter Model"),
          textInput("zip", "Zip Code", "Enter Zipcode")
