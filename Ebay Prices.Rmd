@@ -19,7 +19,7 @@ library("stringr")
 ```{r}
 galaxielink = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_trksid=p2380057.m570.l2632.R2.TR12.TRC2.A0.H0.Xedsel+.TRS0&_nkw=edsel&UF_single_selection=Make%3AFord%2CModel%3AGalaxie&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1"
 galaxiedata = read_html(galaxielink)
-galaxiedata
+
 ```
 
 ```{r}
@@ -87,7 +87,8 @@ baseurl = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Chevr
 firsturl = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw="
 secondurl = "&rt=nc&LH_BIN=1&UF_single_selection=Make%3A"
 thirdurl = "%2CModel%3A"
-fourthurl = "&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=1"
+fourthurl = "&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos="
+fifthurl = "&_fspt=1"
 
 plus = "+"
 finalurl = paste0(firsturl,make,plus,model,secondurl,make,thirdurl,model,fourthurl)
