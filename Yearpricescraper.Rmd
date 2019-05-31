@@ -40,16 +40,16 @@ porscheyear = yearget(porschelisting)
 porscheprice = priceadjust(getprice(porschedata))
 porscheyear
 porscheprice
-porschedataframe = data.frame("Price" = porscheprice, "Year" = porscheyear)
-porschedataframe
 ```
-```{r}
+```{r,eval = FALSE}
 install.packages("ggplot2")
 install.packages("plotly")
 ```
+```{r}
+library(ggplot2)
+```
 
 ```{r}
-ggplot(porschedataframe, aes(x = porscheyear, y = porscheprice)) + geom_point() + labs(title = "Vehicle Price Vs. Vehicle Year") + scale_y_continuous("Price", limits = c(10000,500000)) + scale_x_continuous("Model Year")
 
 ```
 ```{r}
@@ -64,7 +64,7 @@ ggplot(porschedataframe, aes(x = porscheyear, y = porscheprice)) + geom_point() 
 install.packages("Stack")
 ```
 
-```{r}
+```{r, eval=FALSE}
 page1 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=1"
 
 page2 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Porsche+911&rt=nc&LH_BIN=1&UF_single_selection=Make%3APorsche%2CModel%3A911&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60625&_fspt=160441&_fspt=1&_pgn=2"
@@ -100,6 +100,13 @@ page2listing = gettitle(page2html)
 page3listing = gettitle(page3html)
 page4listing = gettitle(page4html)
 
+pricefunc = function(x) {
+  priceadjust(getprice(x))
+}
+
+
+
+
 page1df = data.frame("Listing" = page1listing,   "Price" = page1price)
 page2df = data.frame("Listing" = page2listing,    "Price" = page2price)
 page3df = data.frame("Listing" = page3listing,     "Price" = page3price)
@@ -131,7 +138,35 @@ ggplot(graphdf, aes(x = Year, y = Price)) + geom_point() + labs(title = "Vehicle
 
 
 
+```{r,eval = FALSE}
+    finalurl = paste0(url1,input$make, plus, input$model, url2, input$make, url3, input$model, url4, input$zip, url5,input$length)
+    url1 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw="
+    plus = "+"
+    url2 = "&rt=nc&LH_BIN=1&UF_single_selection=Make%3A"
+    url3 = "%2CModel%3A"
+    url4 = "&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos="
+    url5 = "&_fspt=160441&_fspt=1&_pgn="
+```
+```{r}
+library("xml2")
+```
 
 
+```{r, eval=FALSE}
+one = "1"
+almostfinalurl = paste0(url1, plus, url2, url3, url4, url5,one)
+almostfinalurl
 
+```
+
+```{r}
+"https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Honda+Civic&rt=nc&LH_BIN=1&UF_single_selection=Make%3AHonda%2CModel%3ACivic&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60441&_fspt=1"
+```
+
+```{r}
+https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Honda+Civic&rt=nc&LH_BIN=1&UF_single_selection=Make%3AHonda%2CModel%3ACivic&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60441&_fspt=1&_ipg=100
+```
+```{r}
+https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Honda+Civic&rt=nc&LH_BIN=1&UF_single_selection=Make%3AHonda%2CModel%3ACivic&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60441&_fspt=1&_ipg=100
+```
 

@@ -13,6 +13,10 @@ install.packages("stringr")
 install.packages("xml2")
 install.packages("dplyr")
 ```
+```{r}
+library(dplyr)
+library(rvest)
+```
 
 ```{r}
 library("rvest")
@@ -72,9 +76,7 @@ firebirdtitle = firebirddata %>%
   html_nodes(".s-item__title")%>%
   html_text()
 firebirdtitle
-firebirddf = data.frame("Listing" = firebirdtitle,"Price" = fbpriceadj)
-firebirddf
-summary(fbpriceadj)
+
 
 gettitle = function(x) {
   x %>%
