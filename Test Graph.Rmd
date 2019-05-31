@@ -8,8 +8,8 @@ library(rvest)
 library(stringr)
 library(ggplot2)
 url1 = "https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw="
-make = "Porsche"
-model = "911"
+make = "Mercedes"
+model = ""
 zip = "60441"
      plus = "+"
      url2 = "&rt=nc&LH_BIN=1&UF_single_selection=Make%3A"
@@ -29,11 +29,13 @@ zip = "60441"
      length(year1)
      graphdf = data.frame("Year" = year1, "Price" = listingprim)
      graphdf
-     
-     ggplot(graphdf, aes( x = Year, y = Price)) + geom_point() + labs(title = "Vehicle Price Vs. Vehicle Year") + scale_y_continuous("Price", limits = c(0,400000)) + scale_x_continuous("Model Year")
+     library(plotly)
+     ggplot(graphdf, aes( x = Year, y = Price)) + geom_point() + labs(title = "Vehicle Price Vs. Vehicle Year") + scale_y_continuous("Price", limits = c(0,700000)) + scale_x_continuous("Model Year")
 
      
      
+     
+   
 
 
 
