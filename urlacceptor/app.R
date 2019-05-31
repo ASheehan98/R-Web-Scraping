@@ -53,13 +53,13 @@ server <- function(input, output) {
     url5 = "&_fspt=1&_ipg="
     #https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_from=R40&_nkw=Honda+Civic&rt=nc&LH_BIN=1&UF_single_selection=Make%3AHonda%
     #2CModel%3ACivic&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos=60441&_fspt=1&_ipg=100
-    
+    finalurl = paste0(url1,make,plus,model,url2,make,url3,model,url4,url5)
     
     
     
     if(input$length == "25") {
       resultlength = "25"
-      urlfinal = paste0(url1,make,plus,model,url2,make,url3,model,url4,url5,resultlength)
+      urlfinal = paste0(finalurl,resultlength)
       page1 = read_html(urlfinal)
       listing1 = gettitle(page1)
       adjlisting1 = listing1[-c(1)]
@@ -120,7 +120,9 @@ masterdf
      url4 = "&UF_context=finderType%3AVEHICLE_FINDER&_sacat=6001&_stpos="
      url5 = "&_fspt=1&_ipg=100"
      urlfinal = paste0(url1,make,plus,model,url2,make,url3,model,url4,zip,url5)
-     urlfinal
+     html = read_html(urlfinal)
+     listy = gettitle(html)
+     listy
   
      
 
